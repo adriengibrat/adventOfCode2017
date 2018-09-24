@@ -12,7 +12,15 @@ const norepeat = (fn) => (row) => reduce(
 
 const anagram = (string) => string.split('').sort().join('')
 
-run(`sayndz zfxlkl attjtww cti sokkmty brx fhh suelqbp
+run([{
+		fn: (string) => reduce(string.split(/\n/), sum(norepeat(id)), 0),
+		sample: { 'aa bb cc dd ee': 1,  'aa bb cc dd aa': 0, 'aa bb cc dd aaa': 1 }
+	},
+	{
+		fn: (string) => reduce(string.split(/\n/), sum(norepeat(anagram)), 0),
+		sample: { 'abcde fghij': 1, 'abcde xyz ecdab': 0, 'a ab abc abd abf abj': 1, 'iiii oiii ooii oooi oooo': 1, 'oiii ioii iioi iiio': 0 }
+	}],
+	`sayndz zfxlkl attjtww cti sokkmty brx fhh suelqbp
 xmuf znkhaes pggrlp zia znkhaes znkhaes
 nti rxr bogebb zdwrin
 sryookh unrudn zrkz jxhrdo gctlyz
@@ -524,12 +532,4 @@ xzzpiy cjwss jwscs apb bpa
 ydjhhf yeltadb lwi cjdcb ovaox xrdm vkxub
 zax xza admbc lvpzfeh auxn rwasj
 kebx eild nrskdr meja jxczomh gcne`,
-	{
-		fn: (string) => reduce(string.split(/\n/), sum(norepeat(id)), 0),
-		sample: { 'aa bb cc dd ee': 1,  'aa bb cc dd aa': 0, 'aa bb cc dd aaa': 1 }
-	},
-	{
-		fn: (string) => reduce(string.split(/\n/), sum(norepeat(anagram)), 0),
-		sample: { 'abcde fghij': 1, 'abcde xyz ecdab': 0, 'a ab abc abd abf abj': 1, 'iiii oiii ooii oooi oooo': 1, 'oiii ioii iioi iiio': 0 }
-	},
 )

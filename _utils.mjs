@@ -13,7 +13,7 @@ export const each = (iterable, fn) => Object.keys(iterable).forEach((key) => fn(
 export const reduce = (iterable, reducer, init) => [].reduce.call(iterable, reducer, init)
 
 // Run implementations with provided input after testing optional samples
-export const run = (input, ...implementations) => each(implementations, ({ fn, sample }) => {
+export const run = (implementations, input) => each(implementations, ({ fn, sample }) => {
 	each(sample || [], (expected, value) => assertEquals(expected, fn(value)));
 	console.log(fn(input))
 })
