@@ -4,11 +4,10 @@ const parse = (string) => string.split(/\n/)
 
 const sum = (valid) => (count, row) => count + (valid(row) ? 1 : 0)
 
-const norepeat = (fn) => (row) => reduce(
-	row.split(/\s/),
-	(valid, word, index, words) => valid && !words.some((w, i) => i !== index && fn(w) === fn(word)),
-	true,
-)
+const norepeat = (mapper) => (row) => {
+	const words = row.split(/\s/).map(mapper)
+	return words.length === new Set(words).size
+}
 
 const anagram = (string) => string.split('').sort().join('')
 
