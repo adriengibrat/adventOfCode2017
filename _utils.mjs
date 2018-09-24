@@ -2,6 +2,8 @@ const assertEquals = (expected, value) => {
 	if (expected !== value) throw new Error(`not equal! expected: ${expected}, got: ${value}`)
 }
 
+export const int = (string) => parseInt(string, 10)
+
 // Iterate Arrays, Objects & strings
 export const each = (iterable, fn) => Object.keys(iterable).forEach((key) => fn(iterable[key], key))
 

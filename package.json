@@ -1,0 +1,14 @@
+{
+  "name": "adventofcode2017",
+  "private": true,
+  "description": "Advent of code 2017 https://adventofcode.com/2017",
+  "scripts": {
+    "start": "node --experimental-modules --no-warnings"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adriengibrat/adventOfCode2017.git"
+  },
+  "author": "Adrien Gibrat <adrien.gibrat@gmail.com>",
+  "license": "WTFPL"
+}
