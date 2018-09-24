@@ -1,6 +1,8 @@
 const assertEquals = (expected, value) => {
 	if (expected !== value) throw new Error(`not equal! expected: ${expected}, got: ${value}`)
 }
+ // Identity
+export const id = (a) => a
 
 export const int = (string) => parseInt(string, 10)
 
