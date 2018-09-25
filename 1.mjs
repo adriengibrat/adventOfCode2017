@@ -1,10 +1,9 @@
-import { run, reduce, int } from './_utils'
+import { run, reduce, sum, int } from './_utils'
 
-const lookup = (string, offset) => (index) =>
-	string.charAt((index += offset) < string.length ? index : index - string.length)
-
-const sum = (next) => (count, digit, index) =>
-	count + (digit === next(index) ? int(digit) : 0)
+const lookup = (string, offset) => (digit, index) => {
+	const next = string.charAt((index += offset) < string.length ? index : index - string.length)
+	return digit === next ? int(digit) : 0
+}
 
 run([{
 		fn: (string) => reduce(string, sum(lookup(string, 1)), 0),

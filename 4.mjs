@@ -1,22 +1,18 @@
-import { run, reduce, id } from './_utils'
-
-const parse = (string) => string.split(/\n/)
-
-const sum = (valid) => (count, row) => count + (valid(row) ? 1 : 0)
+import { run, reduce, sum, parse, id } from './_utils'
 
 const norepeat = (mapper) => (row) => {
 	const words = row.split(/\s/).map(mapper)
-	return words.length === new Set(words).size
+	return words.length === new Set(words).size ? 1 : 0
 }
 
 const anagram = (string) => string.split('').sort().join('')
 
 run([{
-		fn: (string) => reduce(string.split(/\n/), sum(norepeat(id)), 0),
+		fn: (string) => reduce(parse(string), sum(norepeat(id)), 0),
 		sample: { 'aa bb cc dd ee': 1,  'aa bb cc dd aa': 0, 'aa bb cc dd aaa': 1 }
 	},
 	{
-		fn: (string) => reduce(string.split(/\n/), sum(norepeat(anagram)), 0),
+		fn: (string) => reduce(parse(string), sum(norepeat(anagram)), 0),
 		sample: { 'abcde fghij': 1, 'abcde xyz ecdab': 0, 'a ab abc abd abf abj': 1, 'iiii oiii ooii oooi oooo': 1, 'oiii ioii iioi iiio': 0 }
 	}],
 	`sayndz zfxlkl attjtww cti sokkmty brx fhh suelqbp

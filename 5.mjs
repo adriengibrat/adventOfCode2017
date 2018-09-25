@@ -1,6 +1,4 @@
-import { run, int } from './_utils'
-
-const parse = (string) => string.split(/\n/).map(int)
+import { run, parse, int } from './_utils'
 
 const steps = (offsets, skip) => {
 	let index = 0, steps = 0
@@ -14,10 +12,10 @@ const steps = (offsets, skip) => {
 }
 
 run([{
-		fn: (string) => steps(parse(string), () => 1),
+		fn: (string) => steps(parse(string, int), () => 1),
 		sample: { '0\n3\n0\n1\n-3': 5 }
 	},{
-		fn: (string) => steps(parse(string), (n) => n >= 3 ? -1 : 1),
+		fn: (string) => steps(parse(string, int), (n) => n >= 3 ? -1 : 1),
 		sample: { '0\n3\n0\n1\n-3': 10 }
 	}],
 	`0

@@ -1,9 +1,6 @@
-import { run, reduce, int } from './_utils'
+import { run, reduce, sum, parse, int } from './_utils'
 
-const parse = (string) =>
-	string.split(/\n/).map((line) => line.split(/\s/).map(int))
-
-const sum = (checksum) => (count, row) => count + checksum(row)
+const parser = (line) => line.split(/\s/).map(int)
 
 const diff = (row) => Math.max(...row) - Math.min(...row)
 
@@ -12,11 +9,11 @@ const divide = (row) => reduce(row, (found, divisor, index, row) =>
 )
 
 run([{
-		fn: (string) => reduce(parse(string), sum(diff), 0),
+		fn: (string) => reduce(parse(string, parser), sum(diff), 0),
 		sample: { '5 1 9 5\n7 5 3\n2 4 6 8': 18 }
 	},
 	{
-		fn: (string) => reduce(parse(string), sum(divide), 0),
+		fn: (string) => reduce(parse(string, parser), sum(divide), 0),
 		sample: { '5 9 2 8\n9 4 7 3\n3 8 6 5': 9 }
 	}],
 	`414	382	1515	319	83	1327	116	391	101	749	1388	1046	1427	105	1341	1590
