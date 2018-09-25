@@ -1,14 +1,12 @@
 import { run, parse, int } from './_utils'
 
-const steps = (offsets, skip) => {
-	let index = 0, steps = 0
-	while(index >= 0 && index < offsets.length) {
+const steps = (offsets, skip, count = 0) => {
+	for (let index = 0; index >= 0 && index < offsets.length; count++) {
 		const offset = offsets[index]
 		offsets[index] += skip(offset)
 		index += offset
-		steps++
 	}
-	return steps
+	return count
 }
 
 run([{
