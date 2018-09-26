@@ -1,8 +1,27 @@
-import { run } from './_utils'
+import { run, reduce, parse } from './_utils'
+
+const parser = (line) => line.match(/^(\w+) (inc|dec) ([-\d]+) if (\w+)(.*)$/)
+
+const exec = (env, [ _, variable, operation, number, cVariable, condition ]) => eval(
+	`const env = ${JSON.stringify(env)}
+	const _inc_ = (x, i) => x + i
+	const _dec_ = (x, i) => x - i
+	if ((env.${cVariable} || 0 )${condition})
+		env.${variable} = _${operation}_(env.${variable} || 0, ${number})
+	env`
+)
+
+const max = (env) =>  Math.max(...Object.values(env))
 
 run([{
-		fn: (string) => 1,
+		fn: (string) => max(reduce(parse(string, parser), exec, {})),
 		sample: { 'b inc 5 if a > 1\na inc 1 if b < 5\nc dec -10 if a >= 1\nc inc -20 if c == 10': 1 }
+	}, {
+		fn: (string) => reduce(parse(string, parser), ({ env, localMax }, line) => {
+			env = exec(env, line)
+			return { env, localMax: Math.max(max(env), localMax) }
+		}, {env: {}, localMax: 0}).localMax,
+		sample: { 'b inc 5 if a > 1\na inc 1 if b < 5\nc dec -10 if a >= 1\nc inc -20 if c == 10': 10 }
 	}],
 	`v inc 523 if t == 6
 qen dec -450 if lht != 10
