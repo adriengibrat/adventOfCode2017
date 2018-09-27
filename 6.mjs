@@ -3,16 +3,13 @@ import { run, int } from './_utils'
 const parse = (string) => string.split(/\s/).map(int)
 
 const distribute = (banks) => {
-	banks = banks.slice()
+	banks = Array.from(banks)
 	const max = Math.max(...banks)
 	const index = banks.findIndex((value) => value === max)
 	const amount = banks.splice(index, 1, 0).pop()
-	const add = Math.floor(amount / banks.length)
-	const extra = amount % banks.length
-	// console.log({max,index,amount,add,extra,banks})
-	return banks.map((value, i) =>
-		value + add + ((i + index - 1) % banks.length < extra && (i + index) > 0 ? 1: 0)
-	)
+	for(let i = 1; i <= amount; i++)
+		banks[(index + i) % banks.length]++
+	return banks
 }
 
 const roll = (banks, count) => {
@@ -22,7 +19,6 @@ const roll = (banks, count) => {
 		seen[banks] = i++
 		banks = distribute(banks)
 	}
-	// console.log(seen, banks)
 	return count(seen, banks)
 }
 
